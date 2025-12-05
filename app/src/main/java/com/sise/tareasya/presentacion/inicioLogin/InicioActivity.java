@@ -47,7 +47,7 @@ public class InicioActivity extends AppCompatActivity {
         tvRegistro = findViewById(R.id.tvRegistro);
 
         // Configurar clic en "Mostrar"
-        tvShowPassword.setOnClickListener(v -> togglePasswordVisibility());
+        tvShowPassword.setOnClickListener(v -> AlternarVisibilidaddeContra());
 
         // Configurar botón de login (si está en el XML con android:onClick)
         // O puedes hacerlo programáticamente:
@@ -106,7 +106,7 @@ public class InicioActivity extends AppCompatActivity {
         }, 1500);
     }
 
-    private void togglePasswordVisibility() {
+    private void AlternarVisibilidaddeContra() {
         if (passwordVisible) {
             // Ocultar contraseña
             etPassword.setInputType(android.text.InputType.TYPE_CLASS_TEXT |

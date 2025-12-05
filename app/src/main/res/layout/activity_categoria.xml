@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentacion.categorias.CategoriaActivity">
+
+    <TextView
+        android:id="@+id/actcategoria_tv_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textSize="30sp"
+        android:text="@string/categoria"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- ScrollView para contenido desplazable -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actcategoria_tv_titulo"
+        app:layout_constraintBottom_toTopOf="@+id/actcategoria_btn_nueva">
+
+        <LinearLayout
+            android:id="@+id/llCategorias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Categoría 1 - Personal -->
+            <include
+                layout="@layout/cardcategoria"
+                android:id="@+id/categoria1" />
+
+            <!-- Categoría 2 - Trabajo -->
+            <include
+                layout="@layout/cardcategoria"
+                android:id="@+id/categoria2" />
+
+            <!-- Categoría 3 - Compras -->
+            <include
+                layout="@layout/cardcategoria"
+                android:id="@+id/categoria3" />
+
+            <!-- Categoría 4 - Salud -->
+            <include
+                layout="@layout/cardcategoria"
+                android:id="@+id/categoria4" />
+
+            <!-- Categoría 5 - Estudio -->
+            <include
+                layout="@layout/cardcategoria"
+                android:id="@+id/categoria5" />
+
+            <!-- Categoría 6 - Hogar -->
+            <include
+                layout="@layout/cardcategoria"
+                android:id="@+id/categoria6" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/actcategoria_btn_nueva"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/NEWCATEGORÍA"
+        android:textAllCaps="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

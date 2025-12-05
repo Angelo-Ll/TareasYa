@@ -25,8 +25,6 @@
     <string name="desc_fab">Agregar nueva tarea</string>
 
 
-
-
     <!-- ActivityAgregarTarea -->
     <string name="agregar_tareaA">Agregar Tarea</string>
     <string name="titulo_tarea">Título de la tarea</string>
@@ -54,5 +52,13 @@
         <item>Media</item>
         <item>Baja</item>
     </string-array>
+
+    <!-- Categoria -->
+    <string name="NEWCATEGORÍA">NUEVA CATEGORÍA:</string>
+    <string name="Categories">Categories:</string>
+    <string name="NroCategoria">5 tareas</string>
+
+
+
 
 </resources>

@@ -75,7 +75,8 @@
             android:id="@+id/spinnerCategoria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#BDBDBD"            android:padding="12dp"
+            android:backgroundTint="#BDBDBD"
+            android:padding="12dp"
             android:layout_marginBottom="24dp" />
 
         <!-- Fecha -->
