@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">TareasYa</string>
+    <!-- ActivityInicio -->
+    <string name="titulo_app">TareasYa</string>
+    <string name="label_email">Correo electrónico</string>
+    <string name="hint_email">usuario@gmail.com</string>
+    <string name="label_password">Contraseña</string>
+    <string name="hint_password">Ingresa tu contraseña</string>
+    <string name="texto_digito">Digito</string>
+    <string name="btn_iniciar_sesion">INICIAR SESIÓN</string>
+    <string name="texto_registro">No tienes cuenta? Regístrate</string>
+    <string name="mostrar_password">Mostrar</string>
+    <string name="desc_logo">Logo de TareasYa</string>
+
+    <!-- ActivityPrincipal -->
+    <string name="buscar_tareas">Buscar tareas..</string>
+    <string name="categorias">Categorías</string>
+    <string name="categoria_personal">Personal</string>
+    <string name="categoria_trabajo">Trabajo</string>
+    <string name="categoria_estudio">Estudio</string>
+    <string name="categoria_otros">Otros</string>
+    <string name="agregar_tarea">AGREGAR TAREA</string>
+    <string name="desc_fab">Agregar nueva tarea</string>
+
+</resources>
