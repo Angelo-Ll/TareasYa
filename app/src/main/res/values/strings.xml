@@ -10,7 +10,9 @@
     <string name="btn_iniciar_sesion">INICIAR SESIÓN</string>
     <string name="texto_registro">No tienes cuenta? Regístrate</string>
     <string name="mostrar_password">Mostrar</string>
+    <string name="ocultar_password">Ocultar</string>
     <string name="desc_logo">Logo de TareasYa</string>
+
 
     <!-- ActivityPrincipal -->
     <string name="buscar_tareas">Buscar tareas..</string>
@@ -21,5 +23,36 @@
     <string name="categoria_otros">Otros</string>
     <string name="agregar_tarea">AGREGAR TAREA</string>
     <string name="desc_fab">Agregar nueva tarea</string>
+
+
+
+
+    <!-- ActivityAgregarTarea -->
+    <string name="agregar_tareaA">Agregar Tarea</string>
+    <string name="titulo_tarea">Título de la tarea</string>
+    <string name="hint_titulo">Ingresa el título</string>
+    <string name="descripcion">Descripción</string>
+    <string name="hint_descripcion">Describe la tarea..</string>
+    <string name="categoria">Categoría:</string>
+    <string name="fecha">Fecha:</string>
+    <string name="hint_fecha">15/11/2023</string>
+    <string name="hora">Hora:</string>
+    <string name="hint_hora">10:30 AM</string>
+    <string name="prioridad">Prioridad:</string>
+    <string name="guardar_tarea">GUARDAR TAREA</string>
+
+    <!-- Arrays para Spinners -->
+    <string-array name="categorias_array">
+        <item>Personal</item>
+        <item>Trabajo</item>
+        <item>Estudio</item>
+        <item>Otros</item>
+    </string-array>
+
+    <string-array name="prioridades_array">
+        <item>Alta</item>
+        <item>Media</item>
+        <item>Baja</item>
+    </string-array>
 
 </resources>

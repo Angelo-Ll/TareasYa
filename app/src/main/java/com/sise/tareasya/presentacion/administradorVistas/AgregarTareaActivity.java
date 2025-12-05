@@ -1,8 +1,6 @@
-package com.sise.tareasya.presentacion;
+package com.sise.tareasya.presentacion.administradorVistas;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,33 +9,18 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.sise.tareasya.R;
-import com.sise.tareasya.presentacion.inicioLogin.InicioActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class AgregarTareaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_agregar_tarea);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
     }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //settimeoout equivalente
-        new Handler().postDelayed(()-> {
-            Intent i = new Intent(this, InicioActivity.class);
-            startActivity(i);
-            this.finish();
-        }, 2000);
-    }
-
-
 }
