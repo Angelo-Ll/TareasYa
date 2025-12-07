@@ -1,4 +1,4 @@
-<h1># 📝 TareasYa – APP de Lista de Tareas con Categorías</h1>
+<h1>TareasYa – APP de Lista de Tareas con Categorías</h1>
 
 ## 📝 Descripción del Proyecto
 Es una aplicación diseñada para ayudar a los usuarios a organizar y gestionar sus actividades
