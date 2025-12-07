@@ -6,9 +6,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     // Cambia esta URL por la de TU API
-    private static final String BASE_URL = "http://TU_IP_LOCAL:3000/api/";
+    private static final String BASE_URL = "http://192.168.0.106:3000/api/v1/";
     // Ejemplo: "http://192.168.1.50:3000/api/"
     // Ejemplo: "http://10.0.2.2:3000/api/" (para emulador)
+    // 192.168.0.106 ip wilmer
 
     private static Retrofit retrofit = null;
 
