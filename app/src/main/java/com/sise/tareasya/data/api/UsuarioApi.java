@@ -10,7 +10,7 @@ import retrofit2.http.POST;
 
 public interface UsuarioApi {
 
-    @POST("usuarios/login")  // Cambia por tu endpoint real
+    @POST("usuarios/verificar")
     Call<BaseResponse<Usuario>> login(@Body LoginRequest request);
 
     // Puedes agregar más endpoints después

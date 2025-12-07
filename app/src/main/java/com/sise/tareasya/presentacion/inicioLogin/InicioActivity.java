@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,63 +13,64 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.sise.tareasya.R;
+import com.sise.tareasya.data.common.BaseResponse;
+import com.sise.tareasya.data.model.Usuario;
 import com.sise.tareasya.presentation.common.Validator;
 import com.sise.tareasya.presentacion.pantallaPrincipal.PrincipalActivity;
 
 public class InicioActivity extends AppCompatActivity {
 
     private EditText etEmail, etPassword;
-    private TextView tvShowPassword, tvRegistro, tvDigito;
+    private TextView tvShowPassword, tvRegistro;
+    private ProgressBar progressBar;
     private boolean passwordVisible = false;
+    private LoginViewModel loginViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Habilitar EdgeToEdge
         EdgeToEdge.enable(this);
-
-        // Establecer el layout
         setContentView(R.layout.activity_inicio);
 
-        // Configurar EdgeToEdge
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+        // Inicializar ViewModel
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+
         // Inicializar vistas
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         tvShowPassword = findViewById(R.id.tvShowPassword);
         tvRegistro = findViewById(R.id.tvRegistro);
+        progressBar = findViewById(R.id.progressBar);
 
-        // Configurar clic en "Mostrar"
+        // Configurar loading observer (si tu ViewModel lo tiene)
+        // Si no, elimina esta parte
+
         tvShowPassword.setOnClickListener(v -> AlternarVisibilidaddeContra());
 
-        // Configurar botón de login (si está en el XML con android:onClick)
-        // O puedes hacerlo programáticamente:
         View btnIniciarSesion = findViewById(R.id.btnIniciarSesion);
         if (btnIniciarSesion != null) {
             btnIniciarSesion.setOnClickListener(v -> onClicIniciarSesion(v));
         }
 
-        // Configurar registro (si existe)
         if (tvRegistro != null) {
             tvRegistro.setOnClickListener(v -> {
                 // Ir a pantalla de registro
-                // Intent intent = new Intent(this, RegistroActivity.class);
-                // startActivity(intent);
             });
         }
     }
 
-    // Método llamado desde el XML con android:onClick="onClicIniciarSesion"
     public void onClicIniciarSesion(View v) {
-
         // Validar email
         if (!Validator.with(etEmail)
                 .required()
@@ -89,40 +91,55 @@ public class InicioActivity extends AppCompatActivity {
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
 
-        // Aquí iría la llamada a tu API
-        // Por ahora simulamos login exitoso
+        // Mostrar loading
+        progressBar.setVisibility(View.VISIBLE);
+        findViewById(R.id.btnIniciarSesion).setEnabled(false);
 
-        // Mostrar mensaje
-        Toast.makeText(this, "Iniciando sesión...", Toast.LENGTH_SHORT).show();
+        // Llamar al ViewModel para hacer login REAL
+        loginViewModel.login(email, password).observe(this, new Observer<BaseResponse<Usuario>>() {
+            @Override
+            public void onChanged(BaseResponse<Usuario> response) {
+                // Ocultar loading
+                progressBar.setVisibility(View.GONE);
+                findViewById(R.id.btnIniciarSesion).setEnabled(true);
 
-        // Simular delay de red
-        new android.os.Handler().postDelayed(() -> {
-            // Aquí normalmente verificarías con tu API
-            // Por ahora vamos directamente a la pantalla principal
+                if (response != null) {
+                    handleLoginResponse(response);
+                }
+            }
+        });
+    }
 
-            Intent intent = new Intent(this, PrincipalActivity.class);
-            startActivity(intent);
-            finish(); // Opcional: cierra esta actividad
-        }, 1500);
+    private void handleLoginResponse(BaseResponse<Usuario> response) {
+        if (response.isSuccess()) {
+            Usuario usuario = response.getData();
+            if (usuario != null) {
+                Toast.makeText(this, "¡Bienvenido " + usuario.getNombre() + "!", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(this, PrincipalActivity.class);
+                intent.putExtra("ID_USUARIO", usuario.getId());
+                intent.putExtra("NOMBRE_USUARIO", usuario.getNombre());
+                intent.putExtra("EMAIL_USUARIO", usuario.getEmail());
+                startActivity(intent);
+                finish();
+            }
+        } else {
+            Toast.makeText(this, "Error: " + response.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void AlternarVisibilidaddeContra() {
         if (passwordVisible) {
-            // Ocultar contraseña
             etPassword.setInputType(android.text.InputType.TYPE_CLASS_TEXT |
                     android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
             tvShowPassword.setText(R.string.mostrar_password);
         } else {
-            // Mostrar contraseña
             etPassword.setInputType(android.text.InputType.TYPE_CLASS_TEXT |
                     android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             tvShowPassword.setText(R.string.ocultar_password);
         }
 
-        // Mantener cursor al final
         etPassword.setSelection(etPassword.getText().length());
-
-        // Cambiar estado
         passwordVisible = !passwordVisible;
     }
 }

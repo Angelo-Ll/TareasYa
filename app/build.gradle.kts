@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.sise.tareasya"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.sise.tareasya"
@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.okhttp)  // Esto incluye logging-interceptor
+    implementation(libs.logging.interceptor)
 
     // GSON
     implementation(libs.gson)

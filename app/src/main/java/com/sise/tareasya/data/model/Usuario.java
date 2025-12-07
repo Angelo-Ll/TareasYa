@@ -1,14 +1,32 @@
 package com.sise.tareasya.data.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Usuario {
+
+    @SerializedName("idUsuario")  // ¡ESTO ES CLAVE!
     private int id;
+
+    @SerializedName("nombre")
     private String nombre;
+
+    @SerializedName("apePaterno")
     private String apePaterno;
+
+    @SerializedName("apeMaterno")
     private String apeMaterno;
+
+    @SerializedName("email")
     private String email;
-    private String password; // Solo para login, no enviar de vuelta
-    private String createdAt;
-    private String updatedAt;
+
+    @SerializedName("password")
+    private String password;
+
+    @SerializedName("auditoria")
+    private int auditoria;  // Cambié esto porque tu API devuelve "auditoria", no "createdAt"
+
+    @SerializedName("fechaCreacion")
+    private String fechaCreacion;  // Cambié esto porque tu API devuelve "fechaCreacion"
 
     // Constructor vacío (IMPORTANTE para Retrofit)
     public Usuario() {}
@@ -38,11 +56,11 @@ public class Usuario {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
-    public String getCreatedAt() { return createdAt; }
-    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
+    public int getAuditoria() { return auditoria; }
+    public void setAuditoria(int auditoria) { this.auditoria = auditoria; }
 
-    public String getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(String updatedAt) { this.updatedAt = updatedAt; }
+    public String getFechaCreacion() { return fechaCreacion; }
+    public void setFechaCreacion(String fechaCreacion) { this.fechaCreacion = fechaCreacion; }
 
     // Método útil para mostrar nombre completo
     public String getNombreCompleto() {
