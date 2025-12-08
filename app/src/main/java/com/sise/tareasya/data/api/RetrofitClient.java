@@ -37,4 +37,9 @@ public class RetrofitClient {
     public static UsuarioApi getUsuarioApi() {
         return getClient().create(UsuarioApi.class);
     }
+
+    // NUEVO: Método para obtener CategoriaApi
+    public static CategoriaApi getCategoriaApi() {
+        return getClient().create(CategoriaApi.class);
+    }
 }
