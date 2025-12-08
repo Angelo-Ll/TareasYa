@@ -61,4 +61,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    //lombok
+    compileOnly(libs.lombok)
+    annotationProcessor(libs.lombok.annotationProcessor)
 }

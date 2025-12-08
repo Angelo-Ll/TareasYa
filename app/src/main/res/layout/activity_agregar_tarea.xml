@@ -2,6 +2,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_marginTop="30dp"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -92,12 +95,15 @@
             android:id="@+id/etFecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_fecha"
+            android:hint="Seleccionar fecha"
             android:textSize="16sp"
             android:padding="12dp"
-            android:backgroundTint="#BDBDBD"            android:drawableEnd="@android:drawable/arrow_down_float"
+            android:backgroundTint="#BDBDBD"
+            android:drawableEnd="@android:drawable/ic_menu_my_calendar"
             android:clickable="true"
             android:focusable="false"
+            android:cursorVisible="false"
+            android:inputType="none"
             android:layout_marginBottom="24dp" />
 
         <!-- Hora -->
@@ -113,12 +119,15 @@
             android:id="@+id/etHora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_hora"
+            android:hint="Seleccionar hora"
             android:textSize="16sp"
             android:padding="12dp"
-            android:backgroundTint="#BDBDBD"            android:drawableEnd="@android:drawable/arrow_down_float"
+            android:backgroundTint="#BDBDBD"
+            android:drawableEnd="@drawable/ic_clock"
             android:clickable="true"
             android:focusable="false"
+            android:cursorVisible="false"
+            android:inputType="none"
             android:layout_marginBottom="24dp" />
 
         <!-- Prioridad -->
@@ -134,7 +143,8 @@
             android:id="@+id/spinnerPrioridad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#BDBDBD"            android:padding="12dp"
+            android:backgroundTint="#BDBDBD"
+            android:padding="12dp"
             android:layout_marginBottom="32dp" />
 
         <!-- Línea divisoria -->

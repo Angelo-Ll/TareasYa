@@ -117,7 +117,7 @@ public class InicioActivity extends AppCompatActivity {
                 Toast.makeText(this, "¡Bienvenido " + usuario.getNombre() + "!", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(this, PrincipalActivity.class);
-                intent.putExtra("ID_USUARIO", usuario.getId());
+                intent.putExtra("ID_USUARIO", usuario.getIdUsuario());
                 intent.putExtra("NOMBRE_USUARIO", usuario.getNombre());
                 intent.putExtra("EMAIL_USUARIO", usuario.getEmail());
                 startActivity(intent);

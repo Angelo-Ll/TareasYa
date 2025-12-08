@@ -14,6 +14,7 @@ okhttp = "4.12.0"
 loggingInterceptor = "4.12.0"
 lifecycleViewModel = "2.6.2"
 lifecycleLivedata = "2.6.2"
+lombok = "1.18.32"
 
 [libraries]
 # Core Android
@@ -38,6 +39,11 @@ logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-intercep
 # ViewModel & LiveData
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewModel" }
 lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedata" }
+
+#lombok
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
+lombok-annotationProcessor = { module = "org.projectlombok:lombok", version.ref = "lombok" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
