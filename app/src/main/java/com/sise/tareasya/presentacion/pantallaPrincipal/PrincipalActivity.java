@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton; // AÑADE ESTO
 import com.sise.tareasya.R;
 import com.sise.tareasya.data.common.BaseResponse;
 import com.sise.tareasya.data.model.categoria;
@@ -26,7 +27,8 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private PrincipalViewModel viewModel;
     private LinearLayout llCategoriasContainer;
-    private Button btnAgregar;
+    private FloatingActionButton fabAgregar; // CAMBIADO: de Button a FloatingActionButton
+    private FloatingActionButton fabCategorias; // NUEVO: para el botón de categorías
     private int idUsuario = 1;
 
     @Override
@@ -62,9 +64,10 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     private void inicializarVistas() {
-        // Buscar SOLO las vistas que existen en el nuevo XML
+        // Buscar las vistas con los tipos correctos
         llCategoriasContainer = findViewById(R.id.llCategoriasContainer);
-        btnAgregar = findViewById(R.id.btnAgregar);
+        fabAgregar = findViewById(R.id.fabAgregar); // CAMBIADO: ya no es btnAgregar
+        fabCategorias = findViewById(R.id.fabCategorias); // NUEVO
 
         // Verificar que se encontraron
         if (llCategoriasContainer == null) {
@@ -73,19 +76,35 @@ public class PrincipalActivity extends AppCompatActivity {
             Log.d("PRINCIPAL", "Contenedor de categorías encontrado");
         }
 
-        if (btnAgregar == null) {
-            Log.e("PRINCIPAL", "ERROR: No se encontró btnAgregar");
+        if (fabAgregar == null) {
+            Log.e("PRINCIPAL", "ERROR: No se encontró fabAgregar");
         } else {
-            Log.d("PRINCIPAL", "Botón agregar encontrado");
+            Log.d("PRINCIPAL", "FAB agregar encontrado");
+        }
+
+        if (fabCategorias == null) {
+            Log.e("PRINCIPAL", "ERROR: No se encontró fabCategorias");
+        } else {
+            Log.d("PRINCIPAL", "FAB categorías encontrado");
         }
     }
 
     private void configurarListeners() {
-        btnAgregar.setOnClickListener(v -> {
+        // Listener para el FAB de agregar tarea
+        fabAgregar.setOnClickListener(v -> {
             Intent intent = new Intent(PrincipalActivity.this, AgregarTareaActivity.class);
             intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        });
+
+        // Listener para el FAB de categorías (NUEVO)
+        fabCategorias.setOnClickListener(v -> {
+            Log.d("PRINCIPAL", "Clic en botón de categorías");
+            // TODO: Implementar navegación a pantalla de categorías
+            // Intent intent = new Intent(PrincipalActivity.this, CategoriasActivity.class);
+            // startActivity(intent);
+            // overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
     }
 

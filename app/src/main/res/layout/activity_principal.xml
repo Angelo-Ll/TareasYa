@@ -1,89 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:orientation="vertical"
     tools:context=".presentacion.pantallaPrincipal.PrincipalActivity">
 
-    <!-- Barra de búsqueda -->
-    <EditText
-        android:id="@+id/etSearch"
+    <!-- Contenido principal -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="@string/buscar_tareas"
-        android:drawableStart="@android:drawable/ic_menu_search"
-        android:drawableTint="#757575"
-        android:padding="12dp"
-        android:textSize="16sp" />
-
-    <!-- Título Categorías -->
-    <TextView
-        android:id="@+id/tvCategorias"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/categorias"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp" />
-
-    <!-- CATEGORÍAS DINÁMICAS CON SCROLL HORIZONTAL -->
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:scrollbars="none">
+        android:layout_height="match_parent"
+        android:paddingBottom="100dp">
 
         <LinearLayout
-            android:id="@+id/llCategoriasContainer"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp" />
+            android:orientation="vertical">
 
-    </HorizontalScrollView>
+            <!-- Barra de búsqueda -->
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:hint="@string/buscar_tareas"
+                android:drawableStart="@android:drawable/ic_menu_search"
+                android:drawableTint="#757575"
+                android:padding="12dp"
+                android:textSize="16sp" />
 
-    <!-- Título Tareas -->
-    <TextView
+            <!-- Título Categorías -->
+            <TextView
+                android:id="@+id/tvCategorias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/categorias"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+
+            <!-- CATEGORÍAS DINÁMICAS CON SCROLL HORIZONTAL -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/llCategoriasContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp" />
+
+            </HorizontalScrollView>
+
+            <!-- Título Tareas -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tus tareas"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- LISTA DINÁMICA DE TAREAS -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTareas"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                tools:listitem="@layout/item_tarea_chat" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- BOTÓN AGREGAR TAREA (FAB principal) -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAgregar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tus tareas"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="24dp"
+        android:src="@android:drawable/ic_menu_add"
+        android:contentDescription="@string/agregar_tarea"
+        app:backgroundTint="#2196F3"
+        app:tint="#FFFFFF" />
 
-    <!-- LISTA DINÁMICA DE TAREAS -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTareas"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:clipToPadding="false"
-        android:paddingBottom="80dp"
-        tools:listitem="@layout/item_tarea_chat" />
-
-    <!-- Botón agregar tarea -->
-    <Button
-        android:id="@+id/btnAgregar"
-        android:layout_width="match_parent"
+    <!-- BOTÓN CATEGORÍAS (FAB secundario) -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabCategorias"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/agregar_tarea"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:background="#2196F3"
-        android:padding="16dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_above="@id/fabAgregar"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_category"
+        android:contentDescription="@string/ir_a_categorias"
+        app:backgroundTint="#4CAF50"
+        app:tint="#FFFFFF"
+        app:fabSize="mini" />
 
-</LinearLayout>
+</RelativeLayout>
