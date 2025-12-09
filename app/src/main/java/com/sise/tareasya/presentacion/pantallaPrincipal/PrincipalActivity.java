@@ -21,6 +21,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sise.tareasya.R;
 import com.sise.tareasya.data.model.categoria;
 import com.sise.tareasya.data.model.tarea;
+import com.sise.tareasya.presentacion.categorias.CategoriaActivity;
+import com.sise.tareasya.presentacion.detallestareas.DetalleTareasActivity;
 import com.sise.tareasya.presentacion.pantallaPrincipal.TareaAdapter;
 import com.sise.tareasya.presentacion.administradorVistas.AgregarTareaActivity;
 
@@ -118,10 +120,10 @@ public class PrincipalActivity extends AppCompatActivity {
             public void onTareaClick(tarea tarea) {
                 // Cuando se hace clic en una tarea
                 Log.d("TAREA_CLICK", "Tarea clickeada: " + tarea.getTitulo());
-                // TODO: Navegar a detalle de tarea
-                // Intent intent = new Intent(PrincipalActivity.this, DetalleTareaActivity.class);
-                // intent.putExtra("ID_TAREA", tarea.getIdTarea());
-                // startActivity(intent);
+                Intent intent = new Intent(PrincipalActivity.this, DetalleTareasActivity.class);
+                intent.putExtra("ID_TAREA", tarea.getIdTarea());  // Pasar ID
+                intent.putExtra("NOMBRE_TAREA", tarea.getTitulo());  // Opcional: pasar nombre
+                startActivity(intent);
             }
         });
 
@@ -139,11 +141,10 @@ public class PrincipalActivity extends AppCompatActivity {
 
         // Listener para el FAB de categorías
         fabCategorias.setOnClickListener(v -> {
-            Log.d("PRINCIPAL", "Clic en botón de categorías");
-            // TODO: Implementar navegación a pantalla de categorías
-            // Intent intent = new Intent(PrincipalActivity.this, CategoriasActivity.class);
-            // startActivity(intent);
-            // overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            Intent intent = new Intent(PrincipalActivity.this, CategoriaActivity.class);
+            intent.putExtra("ID_USUARIO", idUsuario); // Si necesitas pasar el ID
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
 
         // Buscador
