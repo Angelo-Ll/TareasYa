@@ -20,6 +20,9 @@ public interface CategoriaApi {
     @GET("categorias/usuario/{idUsuario}")
     Call<BaseResponse<List<categoria>>> obtenerCategoriasPorUsuario(@Path("idUsuario") int idUsuario);
 
+    @GET("categorias")
+    Call<BaseResponse<List<categoria>>> obtenerTodasLasCategorias();
+
     // Obtener una categoría específica
     @GET("categorias/{idCategoria}")
     Call<BaseResponse<categoria>> obtenerCategoria(@Path("idCategoria") int idCategoria);

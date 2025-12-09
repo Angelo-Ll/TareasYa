@@ -14,11 +14,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton; // AÑADE ESTO
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sise.tareasya.R;
-import com.sise.tareasya.data.common.BaseResponse;
 import com.sise.tareasya.data.model.categoria;
+import com.sise.tareasya.data.model.tarea;
+import com.sise.tareasya.presentacion.pantallaPrincipal.TareaAdapter;
 import com.sise.tareasya.presentacion.administradorVistas.AgregarTareaActivity;
 
 import java.util.List;
@@ -27,8 +30,12 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private PrincipalViewModel viewModel;
     private LinearLayout llCategoriasContainer;
-    private FloatingActionButton fabAgregar; // CAMBIADO: de Button a FloatingActionButton
-    private FloatingActionButton fabCategorias; // NUEVO: para el botón de categorías
+    private FloatingActionButton fabAgregar;
+    private FloatingActionButton fabCategorias;
+    private RecyclerView rvTareas;
+    private EditText etSearch;
+    private TareaAdapter tareaAdapter;
+
     private int idUsuario = 1;
 
     @Override
@@ -56,18 +63,23 @@ public class PrincipalActivity extends AppCompatActivity {
         // Inicializar vistas
         inicializarVistas();
 
+        // Configurar RecyclerView
+        configurarRecyclerView();
+
         // Configurar listeners
         configurarListeners();
 
-        // Cargar categorías dinámicamente desde API
-        cargarCategorias();
+        // Cargar datos
+        cargarDatos();
     }
 
     private void inicializarVistas() {
         // Buscar las vistas con los tipos correctos
         llCategoriasContainer = findViewById(R.id.llCategoriasContainer);
-        fabAgregar = findViewById(R.id.fabAgregar); // CAMBIADO: ya no es btnAgregar
-        fabCategorias = findViewById(R.id.fabCategorias); // NUEVO
+        fabAgregar = findViewById(R.id.fabAgregar);
+        fabCategorias = findViewById(R.id.fabCategorias);
+        rvTareas = findViewById(R.id.rvTareas);
+        etSearch = findViewById(R.id.etSearch);
 
         // Verificar que se encontraron
         if (llCategoriasContainer == null) {
@@ -87,6 +99,33 @@ public class PrincipalActivity extends AppCompatActivity {
         } else {
             Log.d("PRINCIPAL", "FAB categorías encontrado");
         }
+
+        if (rvTareas == null) {
+            Log.e("PRINCIPAL", "ERROR: No se encontró rvTareas");
+        } else {
+            Log.d("PRINCIPAL", "RecyclerView tareas encontrado");
+        }
+    }
+
+    private void configurarRecyclerView() {
+        // Configurar LayoutManager
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        rvTareas.setLayoutManager(layoutManager);
+
+        // Crear adapter vacío inicialmente
+        tareaAdapter = new TareaAdapter(null, new TareaAdapter.OnTareaClickListener() {
+            @Override
+            public void onTareaClick(tarea tarea) {
+                // Cuando se hace clic en una tarea
+                Log.d("TAREA_CLICK", "Tarea clickeada: " + tarea.getTitulo());
+                // TODO: Navegar a detalle de tarea
+                // Intent intent = new Intent(PrincipalActivity.this, DetalleTareaActivity.class);
+                // intent.putExtra("ID_TAREA", tarea.getIdTarea());
+                // startActivity(intent);
+            }
+        });
+
+        rvTareas.setAdapter(tareaAdapter);
     }
 
     private void configurarListeners() {
@@ -98,7 +137,7 @@ public class PrincipalActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
 
-        // Listener para el FAB de categorías (NUEVO)
+        // Listener para el FAB de categorías
         fabCategorias.setOnClickListener(v -> {
             Log.d("PRINCIPAL", "Clic en botón de categorías");
             // TODO: Implementar navegación a pantalla de categorías
@@ -106,11 +145,37 @@ public class PrincipalActivity extends AppCompatActivity {
             // startActivity(intent);
             // overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
+
+        // Buscador
+        etSearch.setOnEditorActionListener((v, actionId, event) -> {
+            String busqueda = etSearch.getText().toString().trim();
+            if (!busqueda.isEmpty()) {
+                buscarTareas(busqueda);
+            }
+            return true;
+        });
     }
 
-    private void cargarCategorias() {
-        // Observar las categorías del ViewModel
-        viewModel.getCategoriasLiveData().observe(this, response -> {
+    private void cargarDatos() {
+        // Cargar tareas
+        viewModel.obtenerTareasPorUsuario(idUsuario).observe(this, response -> {
+            if (response.isSuccess()) {
+                List<tarea> tareas = response.getData();
+                if (tareas != null && !tareas.isEmpty()) {
+                    Log.d("TAREAS", "Tareas recibidas: " + tareas.size());
+                    mostrarTareas(tareas);
+                } else {
+                    Log.d("TAREAS", "No hay tareas disponibles");
+                    mostrarTareasVacia();
+                }
+            } else {
+                Log.e("TAREAS", "Error: " + response.getMessage());
+                mostrarErrorTareas();
+            }
+        });
+
+        // Cargar categorías
+        viewModel.obtenerCategoriasPorUsuario(idUsuario).observe(this, response -> {
             if (response.isSuccess()) {
                 List<categoria> categorias = response.getData();
                 if (categorias != null && !categorias.isEmpty()) {
@@ -125,12 +190,41 @@ public class PrincipalActivity extends AppCompatActivity {
                 mostrarCategoriasPorDefecto();
             }
         });
-
-        // Llamar al ViewModel para cargar categorías
-        Log.d("CATEGORIAS", "Solicitando categorías para usuario: " + idUsuario);
-        viewModel.cargarCategorias(idUsuario);
     }
 
+    private void mostrarTareas(List<tarea> tareas) {
+        runOnUiThread(() -> {
+            tareaAdapter.setTareas(tareas);
+
+            // Actualizar título con cantidad
+            TextView tvTituloTareas = findViewById(R.id.tvTituloTareas);
+            if (tvTituloTareas != null) {
+                tvTituloTareas.setText("Tus tareas (" + tareas.size() + ")");
+            }
+        });
+    }
+
+    private void mostrarTareasVacia() {
+        runOnUiThread(() -> {
+            // Mostrar mensaje de "No hay tareas"
+            Log.d("UI", "No hay tareas para mostrar");
+        });
+    }
+
+    private void mostrarErrorTareas() {
+        runOnUiThread(() -> {
+            // Mostrar mensaje de error
+            Log.e("UI", "Error al cargar tareas");
+        });
+    }
+
+    private void buscarTareas(String texto) {
+        // Implementar búsqueda local o en API
+        Log.d("BUSQUEDA", "Buscando: " + texto);
+        // TODO: Filtrar tareas por texto
+    }
+
+    // MÉTODOS PARA CATEGORÍAS (del código original)
     private void mostrarCategoriasDinamicas(List<categoria> categorias) {
         if (llCategoriasContainer != null) {
             // Limpiar contenedor
@@ -246,5 +340,13 @@ public class PrincipalActivity extends AppCompatActivity {
 
             Log.d("CATEGORIAS", "Mostrando categorías por defecto");
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Recargar datos cuando vuelva a la pantalla
+        viewModel.obtenerTareasPorUsuario(idUsuario);
+        viewModel.obtenerCategoriasPorUsuario(idUsuario);
     }
 }

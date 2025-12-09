@@ -19,7 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.sise.tareasya.R;
 import com.sise.tareasya.data.common.BaseResponse;
 import com.sise.tareasya.data.model.Usuario;
-import com.sise.tareasya.presentation.common.Validator;
+import com.sise.tareasya.presentacion.common.Validator;
 import com.sise.tareasya.presentacion.pantallaPrincipal.PrincipalActivity;
 
 public class InicioActivity extends AppCompatActivity {

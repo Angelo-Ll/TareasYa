@@ -42,4 +42,9 @@ public class RetrofitClient {
     public static CategoriaApi getCategoriaApi() {
         return getClient().create(CategoriaApi.class);
     }
+
+    // NUEVO: Método para obtener TareaApi
+    public static TareaApi getTareaApi() {
+        return getClient().create(TareaApi.class);
+    }
 }
