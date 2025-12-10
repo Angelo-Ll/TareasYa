@@ -15,6 +15,9 @@
         android:theme="@style/Theme.TareasYa"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentacion.usuarios.AgregarUsuariosActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentacion.detallestareas.DetalleTareasActivity"
             android:exported="false" />
         <activity

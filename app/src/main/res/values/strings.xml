@@ -61,5 +61,14 @@
     <string name="ir_a_categorias">Ir a categorías</string>
     <string name="gestionar_categorias">Gestionar categorías</string>
 
+    <!-- Agregar Usuario -->
+    <string name="titulo">Registrar Nuevo Usuario</string>
+    <string name="nombre">Nombre</string>
+    <string name="ape_paterno">Apellido Paterno</string>
+    <string name="ape_materno">Apellido Materno</string>
+    <string name="correoUsuario">correo electronico</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="Registrar">Registrar</string>
+    <string name="Cancelar">Cancelar</string>
 
 </resources>

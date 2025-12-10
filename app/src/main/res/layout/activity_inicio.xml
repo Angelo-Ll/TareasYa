@@ -128,6 +128,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/texto_registro"
+        android:onClick="onClickRegistrarUser"
         android:textColor="#2196F3"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/btnIniciarSesion"

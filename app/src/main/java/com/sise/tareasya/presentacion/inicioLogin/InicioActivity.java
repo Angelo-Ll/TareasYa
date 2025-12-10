@@ -21,6 +21,7 @@ import com.sise.tareasya.data.common.BaseResponse;
 import com.sise.tareasya.data.model.Usuario;
 import com.sise.tareasya.presentacion.common.Validator;
 import com.sise.tareasya.presentacion.pantallaPrincipal.PrincipalActivity;
+import com.sise.tareasya.presentacion.usuarios.AgregarUsuariosActivity;
 
 public class InicioActivity extends AppCompatActivity {
 
@@ -63,11 +64,6 @@ public class InicioActivity extends AppCompatActivity {
             btnIniciarSesion.setOnClickListener(v -> onClicIniciarSesion(v));
         }
 
-        if (tvRegistro != null) {
-            tvRegistro.setOnClickListener(v -> {
-                // Ir a pantalla de registro
-            });
-        }
     }
 
     public void onClicIniciarSesion(View v) {
@@ -142,4 +138,11 @@ public class InicioActivity extends AppCompatActivity {
         etPassword.setSelection(etPassword.getText().length());
         passwordVisible = !passwordVisible;
     }
+
+    public void onClickRegistrarUser(View v){
+        Intent i = new Intent(this, AgregarUsuariosActivity.class);
+        startActivity(i);
+    }
+
+
 }
