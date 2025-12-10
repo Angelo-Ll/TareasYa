@@ -8,7 +8,8 @@ import java.util.concurrent.TimeUnit; // ¡AGREGA ESTO!
 
 public class RetrofitClient {
 
-    private static final String BASE_URL = "http://192.168.1.5:3000/api/v1/";
+    private static final String BASE_URL = "http://192.168.0.106:3000/api/v1/";
+    //192.168.1.5
 
     private static Retrofit retrofit = null;
 
