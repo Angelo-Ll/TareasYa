@@ -23,6 +23,8 @@ import com.sise.tareasya.presentacion.common.Validator;
 import com.sise.tareasya.presentacion.pantallaPrincipal.PrincipalActivity;
 import com.sise.tareasya.presentacion.usuarios.AgregarUsuariosActivity;
 
+
+    // Actividad principal de inicio de sesión de usuarios
 public class InicioActivity extends AppCompatActivity {
 
     private EditText etEmail, etPassword;
@@ -31,6 +33,7 @@ public class InicioActivity extends AppCompatActivity {
     private boolean passwordVisible = false;
     private LoginViewModel loginViewModel;
 
+    // Método onCreate: Configura la interfaz y ViewModel
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +69,7 @@ public class InicioActivity extends AppCompatActivity {
 
     }
 
+    // onClickIniciarSesion: Valida y envía credenciales al servidor
     public void onClicIniciarSesion(View v) {
         // Validar email
         if (!Validator.with(etEmail)
@@ -106,6 +110,7 @@ public class InicioActivity extends AppCompatActivity {
         });
     }
 
+    // handleLoginResponse: Procesa respuesta del servidor
     private void handleLoginResponse(BaseResponse<Usuario> response) {
         if (response.isSuccess()) {
             Usuario usuario = response.getData();
@@ -124,6 +129,7 @@ public class InicioActivity extends AppCompatActivity {
         }
     }
 
+    // AlternarVisibilidaddeContra: Muestra/oculta contraseña
     private void AlternarVisibilidaddeContra() {
         if (passwordVisible) {
             etPassword.setInputType(android.text.InputType.TYPE_CLASS_TEXT |
@@ -139,6 +145,7 @@ public class InicioActivity extends AppCompatActivity {
         passwordVisible = !passwordVisible;
     }
 
+    // onClickRegistrarUser: Navega a pantalla de registro
     public void onClickRegistrarUser(View v){
         Intent i = new Intent(this, AgregarUsuariosActivity.class);
         startActivity(i);

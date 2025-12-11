@@ -12,6 +12,7 @@ import com.sise.tareasya.data.repository.TareaRepository;
 
 import java.util.List;
 
+// Gestiona datos para la pantalla principal (tareas y categorías)
 public class PrincipalViewModel extends ViewModel {
 
     // Repositories (patrón nuevo)
@@ -24,22 +25,23 @@ public class PrincipalViewModel extends ViewModel {
     // LiveData para tareas
     private final MutableLiveData<BaseResponse<List<tarea>>> tareasLiveData = new MutableLiveData<>();
 
-    // MÉTODOS NUEVOS - Para tu Activity actualizada
+    // obtenerTareasPorUsuario: Obtiene tareas del usuario específico
     public LiveData<BaseResponse<List<tarea>>> obtenerTareasPorUsuario(int idUsuario) {
         tareaRepository.obtenerTareasPorUsuario(idUsuario).observeForever(tareasLiveData::postValue);
         return tareasLiveData;
     }
 
+    // obtenerCategoriasPorUsuario: Obtiene categorías del usuario
     public LiveData<BaseResponse<List<categoria>>> obtenerCategoriasPorUsuario(int idUsuario) {
         categoriaRepository.obtenerCategoriasPorUsuario(idUsuario).observeForever(categoriasLiveData::postValue);
         return categoriasLiveData;
     }
 
-    // MÉTODOS ANTIGUOS - Para compatibilidad con tu código anterior
+    // Para compatibilidad
     public LiveData<BaseResponse<List<categoria>>> getCategoriasLiveData() {
         return categoriasLiveData;
     }
-
+    // Para compatibilidad
     public void cargarCategorias(int idUsuario) {
         categoriaRepository.obtenerCategoriasPorUsuario(idUsuario).observeForever(categoriasLiveData::postValue);
     }

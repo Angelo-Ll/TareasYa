@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.sise.tareasya.R;
 import com.sise.tareasya.presentacion.inicioLogin.InicioActivity;
 
+// Pantalla inicial que muestra logo y redirige al login
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    // onStart: Espera 2 segundos y redirige a InicioActivity
     @Override
     protected void onStart() {
         super.onStart();

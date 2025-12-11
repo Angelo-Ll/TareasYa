@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.widget.EditText;
 import java.util.regex.Pattern;
 
+// Clase para validar campos de entrada (EditText) con diferentes reglas
 public class Validator {
     private EditText editText;
     private String message = "";
@@ -12,11 +13,12 @@ public class Validator {
     private Validator(EditText editText) {
         this.editText = editText;
     }
-
+    // Inicia la cadena de validación
     public static Validator with(EditText editText) {
         return new Validator(editText);
     }
 
+    // Valida que el campo no esté vacío
     public Validator required() {
         if (!isValid) return this;
 
@@ -29,7 +31,7 @@ public class Validator {
         }
         return this;
     }
-
+    // Valida formato de correo electrónico
     public Validator email() {
         if (!isValid) return this;
 
@@ -44,7 +46,7 @@ public class Validator {
         }
         return this;
     }
-
+    // Valida longitud mínima
     public Validator minLength(int length) {
         if (!isValid) return this;
 
@@ -57,7 +59,7 @@ public class Validator {
         }
         return this;
     }
-
+    // Valida longitud máxima
     public Validator maxLength(int length) {
         if (!isValid) return this;
 
@@ -70,7 +72,7 @@ public class Validator {
         }
         return this;
     }
-
+    // Ejecuta validación y muestra/oculta errores
     public boolean validate() {
         if (isValid) {
             editText.setError(null);
@@ -78,7 +80,5 @@ public class Validator {
         return isValid;
     }
 
-    public String getMessage() {
-        return message;
-    }
+
 }

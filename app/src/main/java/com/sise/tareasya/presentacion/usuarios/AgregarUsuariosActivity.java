@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.sise.tareasya.R;
 import com.sise.tareasya.presentacion.inicioLogin.InicioActivity;
 
+// Pantalla para crear nuevas cuentas de usuario
 public class AgregarUsuariosActivity extends AppCompatActivity {
 
     @Override
@@ -26,6 +27,8 @@ public class AgregarUsuariosActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+    // onClickCancelarRegistro: Regresa a pantalla de login
     public void onClickCancelarRegistro(View v){
         Intent i = new Intent(this, InicioActivity.class);
         startActivity(i);

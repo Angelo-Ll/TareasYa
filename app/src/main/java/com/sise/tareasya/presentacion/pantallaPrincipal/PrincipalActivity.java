@@ -27,7 +27,7 @@ import com.sise.tareasya.presentacion.pantallaPrincipal.TareaAdapter;
 import com.sise.tareasya.presentacion.administradorVistas.AgregarTareaActivity;
 
 import java.util.List;
-
+// Pantalla principal que muestra categorías y lista de tareas del usuario
 public class PrincipalActivity extends AppCompatActivity {
 
     private PrincipalViewModel viewModel;
@@ -40,6 +40,8 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private int idUsuario = 1;
 
+
+    // onCreate: Inicializa actividad, obtiene ID usuario y configura ViewModel
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +77,7 @@ public class PrincipalActivity extends AppCompatActivity {
         cargarDatos();
     }
 
+    // inicializarVistas: Busca y referencia componentes UI
     private void inicializarVistas() {
         // Buscar las vistas con los tipos correctos
         llCategoriasContainer = findViewById(R.id.llCategoriasContainer);
@@ -109,6 +112,7 @@ public class PrincipalActivity extends AppCompatActivity {
         }
     }
 
+    // configurarRecyclerView: Configura lista de tareas con adapter
     private void configurarRecyclerView() {
         // Configurar LayoutManager
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -130,6 +134,7 @@ public class PrincipalActivity extends AppCompatActivity {
         rvTareas.setAdapter(tareaAdapter);
     }
 
+    // configurarListeners: Asigna eventos a botones y buscador
     private void configurarListeners() {
         // Listener para el FAB de agregar tarea
         fabAgregar.setOnClickListener(v -> {
@@ -142,7 +147,7 @@ public class PrincipalActivity extends AppCompatActivity {
         // Listener para el FAB de categorías
         fabCategorias.setOnClickListener(v -> {
             Intent intent = new Intent(PrincipalActivity.this, CategoriaActivity.class);
-            intent.putExtra("ID_USUARIO", idUsuario); // Si necesitas pasar el ID
+            intent.putExtra("ID_USUARIO", idUsuario);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
@@ -157,6 +162,7 @@ public class PrincipalActivity extends AppCompatActivity {
         });
     }
 
+    // cargarDatos: Obtiene tareas y categorías del servidor
     private void cargarDatos() {
         // Cargar tareas
         viewModel.obtenerTareasPorUsuario(idUsuario).observe(this, response -> {
@@ -192,7 +198,7 @@ public class PrincipalActivity extends AppCompatActivity {
             }
         });
     }
-
+    // mostrarTareas: Actualiza RecyclerView con datos recibidos
     private void mostrarTareas(List<tarea> tareas) {
         runOnUiThread(() -> {
             tareaAdapter.setTareas(tareas);
@@ -220,12 +226,12 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     private void buscarTareas(String texto) {
-        // Implementar búsqueda local o en API
+
         Log.d("BUSQUEDA", "Buscando: " + texto);
         // TODO: Filtrar tareas por texto
     }
 
-    // MÉTODOS PARA CATEGORÍAS (del código original)
+    // mostrarCategoriasDinamicas: Crea botones dinámicos para categorías
     private void mostrarCategoriasDinamicas(List<categoria> categorias) {
         if (llCategoriasContainer != null) {
             // Limpiar contenedor
@@ -240,7 +246,7 @@ public class PrincipalActivity extends AppCompatActivity {
             Log.d("CATEGORIAS", "Botones creados: " + llCategoriasContainer.getChildCount());
         }
     }
-
+    // crearBotonCategoria: Genera botón visual para cada categoría
     private Button crearBotonCategoria(categoria cat) {
         Button boton = new Button(this);
 
