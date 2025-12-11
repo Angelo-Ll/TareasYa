@@ -10,6 +10,7 @@ public class RetrofitClient {
 
     private static final String BASE_URL = "http://192.168.0.106:3000/api/v1/";
     //192.168.1.5
+    //192.168.0.106 will
 
     private static Retrofit retrofit = null;
 
