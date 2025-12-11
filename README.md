@@ -49,11 +49,8 @@ descripción, fecha límite, prioridad, etc.
 ### ✔️ **Subtareas**
 Permite desglosar cada tarea en pasos más pequeños.
 
-## 📸 Diseño de la BD
-
-
-## 📸 Mockups del Proyecto(Plantillas)
-
+## 📸 Diseño de la BD  y  Mockups del Proyecto(Plantillas)
+[Click para ver la bd y mockups](https://excalidraw.com/#json=immIFb5bDB2JsyS5EcOsE,q5r3YGgUpaaY0lmli_UrsA)
 
 ## 👨‍💻 Equipo de Desarrollo
 - **Wilmer Escobar de la Cruz**
