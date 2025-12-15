@@ -1,120 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentacion.usuarios.AgregarUsuariosActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/actAgregar_usuario_titulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:textSize="30sp"
-        android:text="@string/titulo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/etAgregar_user_nombre"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/nombre"
-        android:background="@android:drawable/editbox_background"
-        android:padding="12dp"
-        android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@id/actAgregar_usuario_titulo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"/>
-    <EditText
-        android:id="@+id/etAgregar_user_apePaterno"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/ape_paterno"
-        android:inputType="textPersonName"
-        android:background="@android:drawable/editbox_background"
-        android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/etAgregar_user_nombre"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
-        />
-    <EditText
-        android:id="@+id/etAgregar_user_apeMaterno"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/ape_materno"
-        android:background="@android:drawable/editbox_background"
-        android:padding="12dp"
-        android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@id/etAgregar_user_apePaterno"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"/>
-    <EditText
-        android:id="@+id/etAgregar_user_correo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/correoUsuario"
-        android:inputType="textEmailAddress"
-        android:background="@android:drawable/editbox_background"
-        android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/etAgregar_user_apeMaterno"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"/>
-    <EditText
-        android:id="@+id/etAgregar_user_contraseña"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/contraseña"
-        android:inputType="textPassword"
-        android:background="@android:drawable/editbox_background"
-        android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/etAgregar_user_correo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"/>
+        android:orientation="vertical"
+        android:padding="24dp">
 
-    <Button
-        android:id="@+id/btnAgregarUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Registrar"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:background="#2196F3"
-        app:layout_constraintTop_toBottomOf="@id/etAgregar_user_contraseña"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="70dp"
-        />
-    <Button
-        android:id="@+id/btnCancelar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Cancelar"
-        android:onClick="onClickCancelarRegistro"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:background="#2196F3"
-        app:layout_constraintTop_toBottomOf="@id/etAgregar_user_contraseña"
-        app:layout_constraintStart_toEndOf="@id/btnAgregarUsuario"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"
-        />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- TÍTULO -->
+        <TextView
+            android:id="@+id/actAgregar_usuario_titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/titulo"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="32dp" />
+
+        <!-- NOMBRE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nombre"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etAgregar_user_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nombre"
+            android:inputType="textPersonName"
+            android:background="@android:drawable/editbox_background"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- APELLIDO PATERNO -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ape_paterno"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etAgregar_user_apePaterno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ape_paterno"
+            android:inputType="textPersonName"
+            android:background="@android:drawable/editbox_background"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- APELLIDO MATERNO -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ape_materno"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etAgregar_user_apeMaterno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ape_materno"
+            android:inputType="textPersonName"
+            android:background="@android:drawable/editbox_background"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- CORREO -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/correoUsuario"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etAgregar_user_correo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/correoUsuario"
+            android:inputType="textEmailAddress"
+            android:background="@android:drawable/editbox_background"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- CONTRASEÑA -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contraseña"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etAgregar_user_contraseña"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/contraseña"
+            android:inputType="textPassword"
+            android:background="@android:drawable/editbox_background"
+            android:padding="12dp"
+            android:layout_marginBottom="32dp" />
+
+        <!-- BOTONES -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Cancelar"
+                android:textStyle="bold"
+                android:onClick="onClickCancelarRegistro" />
+
+            <View
+                android:layout_width="16dp"
+                android:layout_height="0dp" />
+
+            <Button
+                android:id="@+id/btnAgregarUsuario"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Registrar"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
