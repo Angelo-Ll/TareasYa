@@ -72,7 +72,7 @@
     <string name="nombre">Nombre</string>
     <string name="ape_paterno">Apellido Paterno</string>
     <string name="ape_materno">Apellido Materno</string>
-    <string name="correoUsuario">correo electronico</string>
+    <string name="correoUsuario">Correo Electronico</string>
     <string name="contraseña">Contraseña</string>
     <string name="Registrar">Registrar</string>
     <string name="Cancelar">Cancelar</string>

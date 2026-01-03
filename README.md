@@ -50,7 +50,7 @@ descripción, fecha límite, prioridad, etc.
 Permite desglosar cada tarea en pasos más pequeños.
 
 ## 📸 Diseño de la BD  y  Mockups del Proyecto(Plantillas)
-[Click para ver la bd y mockups](https://excalidraw.com/#json=immIFb5bDB2JsyS5EcOsE,q5r3YGgUpaaY0lmli_UrsA)
+[Click para ver la bd y mockups](https://excalidraw.com/#json=nRMB-HC33T6pwkVA4HbV0,TM9mcApR757JswHtGpjR1Q)
 
 ## 👨‍💻 Equipo de Desarrollo
 - **Wilmer Escobar de la Cruz**
