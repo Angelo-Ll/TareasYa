@@ -22,6 +22,9 @@ public class PrincipalViewModel extends ViewModel {
     // LiveData para categorías
     private final MutableLiveData<BaseResponse<List<categoria>>> categoriasLiveData = new MutableLiveData<>();
 
+    // LiveData para creación de categoría
+    private final MutableLiveData<BaseResponse<categoria>> crearCategoriaLiveData = new MutableLiveData<>();
+
     // LiveData para tareas
     private final MutableLiveData<BaseResponse<List<tarea>>> tareasLiveData = new MutableLiveData<>();
 
@@ -37,12 +40,23 @@ public class PrincipalViewModel extends ViewModel {
         return categoriasLiveData;
     }
 
+    // crearCategoria: Crea una nueva categoría
+    public void crearCategoria(categoria categoria) {
+        categoriaRepository.crearCategoria(categoria).observeForever(crearCategoriaLiveData::postValue);
+    }
+
+    // Después de crear una categoría, puedes recargar la lista
+    public void recargarCategorias(int idUsuario) {
+        categoriaRepository.obtenerCategoriasPorUsuario(idUsuario).observeForever(categoriasLiveData::postValue);
+    }
+
     // Para compatibilidad
     public LiveData<BaseResponse<List<categoria>>> getCategoriasLiveData() {
         return categoriasLiveData;
     }
-    // Para compatibilidad
-    public void cargarCategorias(int idUsuario) {
-        categoriaRepository.obtenerCategoriasPorUsuario(idUsuario).observeForever(categoriasLiveData::postValue);
+
+    // Getter para la respuesta de creación de categoría
+    public LiveData<BaseResponse<categoria>> getCrearCategoriaLiveData() {
+        return crearCategoriaLiveData;
     }
 }

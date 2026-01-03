@@ -31,43 +31,14 @@
         app:layout_constraintTop_toBottomOf="@+id/actcategoria_tv_titulo"
         app:layout_constraintBottom_toTopOf="@+id/actcategoria_btn_nueva">
 
+        <!-- LinearLayout para categorías DINÁMICAS -->
         <LinearLayout
-            android:id="@+id/llCategorias"
+            android:id="@+id/llCategoriasContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="8dp" />
 
-            <!-- Categoría 1 - Personal -->
-            <include
-                layout="@layout/cardcategoria"
-                android:id="@+id/categoria1" />
-
-            <!-- Categoría 2 - Trabajo -->
-            <include
-                layout="@layout/cardcategoria"
-                android:id="@+id/categoria2" />
-
-            <!-- Categoría 3 - Compras -->
-            <include
-                layout="@layout/cardcategoria"
-                android:id="@+id/categoria3" />
-
-            <!-- Categoría 4 - Salud -->
-            <include
-                layout="@layout/cardcategoria"
-                android:id="@+id/categoria4" />
-
-            <!-- Categoría 5 - Estudio -->
-            <include
-                layout="@layout/cardcategoria"
-                android:id="@+id/categoria5" />
-
-            <!-- Categoría 6 - Hogar -->
-            <include
-                layout="@layout/cardcategoria"
-                android:id="@+id/categoria6" />
-
-        </LinearLayout>
     </ScrollView>
 
     <Button

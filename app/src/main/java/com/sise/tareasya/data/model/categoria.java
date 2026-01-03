@@ -12,6 +12,8 @@ public class categoria {
     private String nombreCat;
     private int auditoria;
     private String fechaCreacion;
+    private int cantidadTareas;
+
 
     // Constructor útil para crear categorías rápidamente
     public categoria(int idUsuario, String nombreCat) {

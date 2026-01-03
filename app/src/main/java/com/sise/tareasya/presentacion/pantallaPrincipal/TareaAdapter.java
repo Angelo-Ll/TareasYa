@@ -1,6 +1,8 @@
 // app/src/main/java/com/sise/tareasya/presentacion/adapters/TareaAdapter.java
 package com.sise.tareasya.presentacion.pantallaPrincipal;
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sise.tareasya.R;
 import com.sise.tareasya.data.model.tarea;
+import com.sise.tareasya.presentacion.ColorUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -100,12 +103,25 @@ public class TareaAdapter extends RecyclerView.Adapter<TareaAdapter.TareaViewHol
 
             // Categoría
             if (tarea.getCategoria() != null) {
-                tvCategoria.setText(tarea.getCategoria().getNombreCat());
-                // Puedes cambiar el color según la categoría
-                cambiarColorCategoria(tarea.getCategoria().getNombreCat());
+                String nombreCat = tarea.getCategoria().getNombreCat();
+                tvCategoria.setText(nombreCat);
+
+                // USAR LA MISMA LÓGICA QUE PrincipalActivity
+                int color = ColorUtils.getColorIntForCategory(nombreCat);
+                tvCategoria.setBackgroundColor(color);
+                tvCategoria.setTextColor(Color.WHITE);
+
+                // Si necesitas redondeo, usa un GradientDrawable
+                GradientDrawable bg = new GradientDrawable();
+                bg.setColor(color);
+                bg.setCornerRadius(16); // px o dp según necesites
+                tvCategoria.setBackground(bg);
+
             } else {
                 tvCategoria.setText("Sin categoría");
-                tvCategoria.setBackgroundResource(R.drawable.bg_categoria_default);
+                int defaultColor = ColorUtils.getColorIntForCategory("Sin categoría");
+                tvCategoria.setBackgroundColor(defaultColor);
+                tvCategoria.setTextColor(Color.WHITE);
             }
 
             // Contacto/Info adicional (puedes personalizar)
@@ -143,30 +159,20 @@ public class TareaAdapter extends RecyclerView.Adapter<TareaAdapter.TareaViewHol
         }
 
         private void cambiarColorCategoria(String nombreCategoria) {
-            int colorFondo;
-            int colorTexto;
+            // Usar el mismo ColorUtils que PrincipalActivity
+            int color = ColorUtils.getColorIntForCategory(nombreCategoria);
 
-            switch (nombreCategoria.toLowerCase()) {
-                case "personal":
-                    colorFondo = R.drawable.bg_categoria_personal;
-                    colorTexto = android.R.color.white;
-                    break;
-                case "trabajo":
-                    colorFondo = R.drawable.bg_categoria_trabajo;
-                    colorTexto = android.R.color.white;
-                    break;
-                case "estudio":
-                    colorFondo = R.drawable.bg_categoria_estudio;
-                    colorTexto = android.R.color.white;
-                    break;
-                default:
-                    colorFondo = R.drawable.bg_categoria_default;
-                    colorTexto = android.R.color.black;
-                    break;
+            GradientDrawable bg = new GradientDrawable();
+            bg.setColor(color);
+            bg.setCornerRadius(16); // Ajusta según tu diseño
+
+            tvCategoria.setBackground(bg);
+            tvCategoria.setTextColor(Color.WHITE);
+
+            // Opcional: ajustar tamaño del texto si es largo
+            if (nombreCategoria.length() > 10) {
+                tvCategoria.setTextSize(10);
             }
-
-            tvCategoria.setBackgroundResource(colorFondo);
-            tvCategoria.setTextColor(tvCategoria.getResources().getColor(colorTexto));
         }
 
         private String obtenerInfoAdicional(tarea tarea) {

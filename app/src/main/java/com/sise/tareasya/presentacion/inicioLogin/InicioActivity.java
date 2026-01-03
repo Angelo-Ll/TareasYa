@@ -117,6 +117,19 @@ public class InicioActivity extends AppCompatActivity {
             if (usuario != null) {
                 Toast.makeText(this, "¡Bienvenido " + usuario.getNombre() + "!", Toast.LENGTH_SHORT).show();
 
+                // ======================== AQUÍ VA EL CÓDIGO ========================
+                // Guardar datos del usuario en SharedPreferences
+                android.content.SharedPreferences prefs = getSharedPreferences("UsuarioPrefs", MODE_PRIVATE);
+                android.content.SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt("idUsuario", usuario.getIdUsuario());
+                editor.putString("nombreUsuario", usuario.getNombreCompleto());
+                editor.putString("email", usuario.getEmail());
+                editor.putString("nombre", usuario.getNombre());
+                editor.putString("apePaterno", usuario.getApePaterno());
+                editor.putString("apeMaterno", usuario.getApeMaterno());
+                editor.apply();
+                // ======================== FIN DEL CÓDIGO ========================
+
                 Intent intent = new Intent(this, PrincipalActivity.class);
                 intent.putExtra("ID_USUARIO", usuario.getIdUsuario());
                 intent.putExtra("NOMBRE_USUARIO", usuario.getNombre());

@@ -8,6 +8,7 @@ import com.sise.tareasya.data.api.RetrofitClient;
 import com.sise.tareasya.data.common.BaseResponse;
 import com.sise.tareasya.data.model.Usuario;
 import com.sise.tareasya.data.request.LoginRequest;
+import com.sise.tareasya.data.request.RegistroRequest;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -60,4 +61,39 @@ public class UsuarioRepository {
 
         return liveData;
     }
+
+    //METODO PARA AGREGAR USUARIO
+// En UsuarioRepository.java
+    public LiveData<BaseResponse<Usuario>> registrar(RegistroRequest request) {
+        MutableLiveData<BaseResponse<Usuario>> liveData = new MutableLiveData<>();
+
+        Call<BaseResponse<Usuario>> call = usuarioApi.registrar(request);
+
+        call.enqueue(new Callback<BaseResponse<Usuario>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<Usuario>> call, Response<BaseResponse<Usuario>> response) {
+                BaseResponse<Usuario> apiResponse;
+
+                if (response.isSuccessful() && response.body() != null) {
+                    apiResponse = response.body();
+                } else {
+                    apiResponse = new BaseResponse<>();
+                    apiResponse.setSuccess(false);
+                    apiResponse.setMessage("Error en el registro: " + response.code());
+                }
+                liveData.postValue(apiResponse);
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<Usuario>> call, Throwable t) {
+                BaseResponse<Usuario> errorResponse = new BaseResponse<>();
+                errorResponse.setSuccess(false);
+                errorResponse.setMessage("Error de conexión: " + t.getMessage());
+                liveData.postValue(errorResponse);
+            }
+        });
+
+        return liveData;
+    }
+
 }

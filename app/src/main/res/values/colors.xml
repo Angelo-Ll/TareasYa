@@ -4,4 +4,18 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primary">#0E30A9</color>
 
+
+    <color name="primary_color">#2196F3</color>
+    <color name="gray_400">#BDBDBD</color>
+    <color name="gray_600">#757575</color>
+
+    <!-- Colores para categorías -->
+    <color name="color_personal">#2196F3</color>
+    <color name="color_trabajo">#4CAF50</color>
+    <color name="color_estudio">#FF9800</color>
+    <color name="color_hogar">#9C27B0</color>
+    <color name="color_salud">#F44336</color>
+    <color name="color_compras">#795548</color>
+    <color name="color_ocio">#009688</color>
+
 </resources>

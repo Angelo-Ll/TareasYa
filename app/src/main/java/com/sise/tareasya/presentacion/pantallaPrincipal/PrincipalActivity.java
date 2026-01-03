@@ -1,12 +1,14 @@
 package com.sise.tareasya.presentacion.pantallaPrincipal;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +23,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sise.tareasya.R;
 import com.sise.tareasya.data.model.categoria;
 import com.sise.tareasya.data.model.tarea;
+import com.sise.tareasya.presentacion.ColorUtils;
 import com.sise.tareasya.presentacion.categorias.CategoriaActivity;
 import com.sise.tareasya.presentacion.detallestareas.DetalleTareasActivity;
 import com.sise.tareasya.presentacion.pantallaPrincipal.TareaAdapter;
@@ -38,13 +41,37 @@ public class PrincipalActivity extends AppCompatActivity {
     private EditText etSearch;
     private TareaAdapter tareaAdapter;
 
-    private int idUsuario = 1;
+    private int idUsuario;
 
 
     // onCreate: Inicializa actividad, obtiene ID usuario y configura ViewModel
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Obtener ID del usuario de SharedPreferences o Intent
+        SharedPreferences prefs = getSharedPreferences("UsuarioPrefs", MODE_PRIVATE);
+        idUsuario = prefs.getInt("idUsuario", 0);
+
+        // Si no hay en SharedPreferences, intentar del Intent
+        if (idUsuario == 0 && getIntent() != null) {
+            idUsuario = getIntent().getIntExtra("ID_USUARIO", 0);
+
+            // Si viene del Intent, guardar en SharedPreferences
+            if (idUsuario != 0) {
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt("idUsuario", idUsuario);
+                editor.apply();
+            }
+        }
+
+        // Verificar que tenemos un ID de usuario válido
+        if (idUsuario == 0) {
+            Toast.makeText(this, "Error: No se pudo identificar al usuario", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_principal);
 
@@ -55,11 +82,11 @@ public class PrincipalActivity extends AppCompatActivity {
         });
 
         // Obtener ID del usuario del Intent
-        Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("ID_USUARIO")) {
-            idUsuario = intent.getIntExtra("ID_USUARIO", 1);
-            Log.d("PRINCIPAL", "ID Usuario recibido: " + idUsuario);
-        }
+        //Intent intent = getIntent();
+        //if (intent != null && intent.hasExtra("ID_USUARIO")) {
+        //    idUsuario = intent.getIntExtra("ID_USUARIO", 1);
+        //    Log.d("PRINCIPAL", "ID Usuario recibido: " + idUsuario);
+        //}
 
         // Inicializar ViewModel
         viewModel = new ViewModelProvider(this).get(PrincipalViewModel.class);
@@ -254,8 +281,11 @@ public class PrincipalActivity extends AppCompatActivity {
         boton.setText(cat.getNombreCat());
         boton.setTag(cat.getIdcategoria());
 
+        // Obtener color AUTOMÁTICAMENTE basado en el nombre
+        int color = ColorUtils.getColorIntForCategory(cat.getNombreCat());
+
         // Estilos
-        boton.setBackgroundColor(obtenerColorCategoria(cat));
+        boton.setBackgroundColor(color);
         boton.setTextColor(getResources().getColor(android.R.color.white));
         boton.setAllCaps(false);
         boton.setTextSize(14);
@@ -289,35 +319,7 @@ public class PrincipalActivity extends AppCompatActivity {
         return Math.round(dp * density);
     }
 
-    private int obtenerColorCategoria(categoria cat) {
-        String nombre = cat.getNombreCat().toLowerCase();
 
-        // Colores basados en el nombre
-        if (nombre.contains("personal")) {
-            return 0xFF2196F3; // Azul
-        } else if (nombre.contains("trabajo")) {
-            return 0xFF4CAF50; // Verde
-        } else if (nombre.contains("estudio") || nombre.contains("escuela")) {
-            return 0xFFFF9800; // Naranja
-        } else if (nombre.contains("urgente") || nombre.contains("importante")) {
-            return 0xFFF44336; // Rojo
-        } else if (nombre.contains("hogar") || nombre.contains("casa")) {
-            return 0xFF9C27B0; // Morado
-        }
-
-        // Colores aleatorios basados en ID
-        int[] colores = {
-                0xFF2196F3, // Azul
-                0xFF4CAF50, // Verde
-                0xFFFF9800, // Naranja
-                0xFFF44336, // Rojo
-                0xFF9C27B0, // Morado
-                0xFF795548, // Café
-                0xFF607D8B  // Gris azulado
-        };
-
-        return colores[cat.getIdcategoria() % colores.length];
-    }
 
     private void mostrarCategoriasPorDefecto() {
         if (llCategoriasContainer != null) {

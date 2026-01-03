@@ -22,4 +22,6 @@ public class LoginViewModel extends ViewModel {
         LoginRequest request = new LoginRequest(email, password);
         return usuarioRepository.login(request);
     }
+
+
 }

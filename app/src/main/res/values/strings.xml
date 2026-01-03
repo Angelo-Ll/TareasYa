@@ -56,10 +56,16 @@
     <!-- Categoria -->
     <string name="NEWCATEGORÍA">NUEVA CATEGORÍA:</string>
     <string name="Categories">Categories:</string>
+    <string name="NombreCategoria">Nombre de la Categoria:</string>
     <string name="NroCategoria">5 tareas</string>
 
     <string name="ir_a_categorias">Ir a categorías</string>
     <string name="gestionar_categorias">Gestionar categorías</string>
+    <string name="cerrar">Cerrar</string>
+    <string name="color_categoria">Color de la categoría</string>
+    <string name="icono_categoria">Icono de la categoría</string>
+    <string name="descripcion_opcional">Descripción (opcional)</string>
+    <string name="crear_categoria">Crear Categoría</string>
 
     <!-- Agregar Usuario -->
     <string name="titulo">Registrar Nuevo Usuario</string>
