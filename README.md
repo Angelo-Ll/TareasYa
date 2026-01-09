@@ -50,7 +50,7 @@ descripción, fecha límite, prioridad, etc.
 Permite desglosar cada tarea en pasos más pequeños.
 
 ## 📸 Diseño de la BD  y  Mockups del Proyecto(Plantillas)
-[Click para ver la bd y mockups](https://excalidraw.com/#json=nRMB-HC33T6pwkVA4HbV0,TM9mcApR757JswHtGpjR1Q)
+[Click para ver la bd y mockups](https://excalidraw.com/#json=Zesqszlynm2fSYoIiPbvg,tB2x_UMPf4GLKLlJGGvKrA)
 
 
 <img width="929" height="1022" alt="bdTareasYa_ultimo" src="https://github.com/user-attachments/assets/6253cc93-26d0-4683-88cc-e4665e6f515e" />
